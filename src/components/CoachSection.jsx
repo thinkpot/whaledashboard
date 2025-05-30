@@ -1,3 +1,4 @@
+// src/components/CoachSection.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import CTAButton from './CTAButton';
@@ -38,29 +39,28 @@ const CoachSection = ({ imageSrc }) => (
         transition={{ duration: 1, ease: 'easeOut' }}
       >
         <h2 className="text-5xl font-bold mb-2 text-white">
-          VINAY VERMA
+          MAYANK AGARWAL
         </h2>
         <h3 className="text-2xl font-medium text-secondary mb-6">
-          NISM Regd. & MBA in Finance
+          B.Tech, CFA & MBA | Quant & HFT Trader
         </h3>
-        <div className="space-y-5 leading-relaxed">
-          <p>
-            I am Vinay Verma, a passionate stock market coach with over 5 years of trading experience.
-            Holding an MBA in Finance and NISM certification, I bring deep market insights to every session.
-          </p>
-          <p>
-            As founder of Tradings Nerd, I empower both beginners and seasoned traders with actionable
-            strategies—swing trading, intraday setups, and stock selection methods—that stand the test of markets.
-          </p>
-          <p>
-            Having trained over 3500 traders through our workshops, my focus is on real-world, practical skills
-            to help you achieve consistent profitability and recover past losses.
-          </p>
-          <p>
-            My mission is to equip you with the knowledge and confidence to navigate the stock market
-            independently and successfully.
-          </p>
-        </div>
+        <ul className="list-disc list-inside space-y-4 mb-6">
+          <li className="text-xl font-semibold">
+            B.Tech from Delhi Technological University (DTU)
+          </li>
+          <li className="text-xl font-semibold">
+            5+ years in quantitative & high-frequency trading
+          </li>
+          <li className="text-xl font-semibold">
+            Partnered with AngelOne & Exness, managing ₹5+ crore funds
+          </li>
+          <li className="text-xl font-semibold">
+            Trained over 1,000 students in institutional-grade strategies
+          </li>
+          <li className="text-xl font-semibold">
+            Expert in data‑driven market analysis and HFT systems
+          </li>
+        </ul>
 
         {/* CTA Button */}
         <motion.div
@@ -69,11 +69,10 @@ const CoachSection = ({ imageSrc }) => (
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
         >
-          <CTAButton onClick={() => console.log('Register clicked')}>
-            Register Now at ₹9 only <span className="line-through text-gray-400">1999</span>
-          </CTAButton>
+          <CTAButton onClick={() => console.log('CTA clicked')}>
+          Book Your 1-on-1 Meeting
+        </CTAButton>
         </motion.div>
-        <p className="mt-4 italic text-secondary">Price is Less than a Cup of Tea</p>
       </motion.div>
     </div>
   </section>

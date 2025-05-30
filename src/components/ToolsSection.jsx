@@ -1,11 +1,14 @@
+// src/components/ToolsOrbitSection.jsx
 import React, { useState, useEffect } from 'react';
 import { FaShieldAlt, FaBookOpen, FaSearch } from 'react-icons/fa';
 import './ToolsOrbitSection.css';
+import CTAButton from './CTAButton';
+import { motion } from 'framer-motion';
 
 const tools = [
   {
     icon: FaShieldAlt,
-    title: 'Fraud Detection',
+    title: 'Fraud Detection Sheet',
     desc: 'Automatically flag suspicious patterns with advanced algorithms.',
   },
   {
@@ -32,10 +35,10 @@ const ToolsOrbitSection = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-white grid-bg">
+    <section className="py-20 bg-white text-primary">
       {/* Section Heading */}
       <div className="max-w-7xl mx-auto px-4 text-center mb-12">
-        <h2 className="text-4xl font-bold text-primary">Our Pro Tools</h2>
+        <h2 className="text-4xl font-bold">Our Pro Tools</h2>
         <p className="mt-2 text-lg text-gray-600">Seamless integration for smarter trading</p>
       </div>
 
@@ -54,6 +57,8 @@ const ToolsOrbitSection = () => {
                     ? 'border-primary shadow-2xl'
                     : 'border-transparent')
                 }
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
               >
                 <div className="flex items-center mb-4">
                   <div className="p-3 bg-gradient-to-tr from-primary to-secondary text-white rounded-full text-2xl">
@@ -87,19 +92,34 @@ const ToolsOrbitSection = () => {
             {tools.map((t, i) => {
               const Icon = t.icon;
               return (
-                <div
+                <motion.div
                   key={i}
-                  className="orbit-icon"
+                  className="orbit-icon cursor-pointer"
                   style={{ animationDelay: `${i * 2}s` }}
                   onMouseEnter={() => setHovered(i)}
                   onMouseLeave={() => setHovered(null)}
+                  whileHover={{ scale: 1.2 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <Icon size={24} color="#fff" />
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
+      </div>
+
+      {/* CTA Button */}
+      <div className="mt-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <CTAButton onClick={() => console.log('Attend clicked')}>
+            Book Your 1-on-1 Meeting
+          </CTAButton>
+        </motion.div>
       </div>
     </section>
   );

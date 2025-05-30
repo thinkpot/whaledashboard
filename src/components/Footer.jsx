@@ -22,7 +22,6 @@ const Footer = () => (
         <ul className="space-y-1 text-textcolor">
           <li><a href="#tools" className="hover:text-white transition">Tools</a></li>
           <li><a href="#demo" className="hover:text-white transition">Demo</a></li>
-          <li><a href="#pricing" className="hover:text-white transition">Pricing</a></li>
           <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
         </ul>
       </div>
@@ -66,7 +65,7 @@ const Footer = () => (
             <FaInstagram size={20} />
           </a>
         </div>
-        <p className="text-textcolor">support@whalestreet.com</p>
+        <p className="text-textcolor">support@whalestreet.in</p>
       </div>
     </div>
     <div className="mt-8 text-center text-sm text-textcolor">

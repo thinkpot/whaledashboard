@@ -16,70 +16,74 @@ const FAQSection = () => {
   const toggle = idx => setOpenIndex(openIndex === idx ? null : idx);
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-primary/5 to-secondary/5 overflow-hidden">
-      {/* Decorative floating circles */}
+    <section className="relative py-20 bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
+      {/* Decorative floating shapes */}
       <motion.div
-        className="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full"
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+        className="absolute top-0 left-1/2 w-48 h-48 bg-primary/20 rounded-full -translate-x-1/2"
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-10 right-10 w-40 h-40 bg-secondary/20 rounded-full"
-        animate={{ scale: [1, 1.15, 1] }}
-        transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
+        className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/20 rounded-full"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4">
         {/* Heading */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-16">
           <motion.h2
-            className="text-4xl font-bold text-primary"
-            initial={{ opacity: 0, y: -20 }}
+            className="text-5xl font-extrabold text-primary"
+            initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            FAQs
+            Frequently Asked Questions
           </motion.h2>
           <motion.div
-            className="mx-auto mt-2 h-1 w-20 bg-primary rounded"
+            className="mx-auto mt-4 h-1 w-24 bg-secondary rounded-full"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
           />
         </div>
 
         {/* FAQ Items */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqs.map((item, idx) => (
             <motion.div
               key={idx}
-              className="bg-white rounded-xl shadow-lg overflow-hidden"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden border border-transparent hover:border-primary/30 transition-all"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 * idx }}
-              whileHover={{ scale: 1.02 }}
+              transition={{ delay: idx * 0.1 }}
             >
               <button
-                className="w-full flex justify-between items-center p-5"
+                className="w-full flex justify-between items-center p-6"
                 onClick={() => toggle(idx)}
               >
-                <span className="text-lg font-medium text-primary">{item.question}</span>
-                {openIndex === idx ? (
-                  <FaMinus className="text-primary" />
-                ) : (
-                  <FaPlus className="text-primary" />
-                )}
+                <span className="text-xl font-semibold text-primary">
+                  {item.question}
+                </span>
+                <motion.span
+                  animate={{ rotate: openIndex === idx ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-secondary"
+                >
+                  {openIndex === idx ? <FaMinus /> : <FaPlus />}
+                </motion.span>
               </button>
-              <AnimatePresence>
+
+              <AnimatePresence initial={false}>
                 {openIndex === idx && (
                   <motion.div
-                    className="px-5 pb-5 bg-secondary/10"
+                    className="px-6 pb-6 bg-secondary/10 text-textcolor2"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
                   >
-                    <p className="text-textcolor2 leading-relaxed">
+                    <p className="leading-relaxed text-base">
                       {item.answer}
                     </p>
                   </motion.div>

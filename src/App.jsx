@@ -18,12 +18,13 @@ function App() {
       <DashboardShowcaseSection />
       <TransitionSection />
       <IndicatorShowcaseSection imageSrc="/indicator.jpeg" />
-      <AttendSection />
-      <GiftsSection />
-      <CoachSection imageSrc="/personal.webp" />
-      <FAQSection />
-      <PnLSection />
       <ToolsSection />
+      <PnLSection />
+      <AttendSection />
+      <CoachSection imageSrc="/personal.webp" />
+      <GiftsSection />
+      <FAQSection />
+      
       <Footer />
       {/* ...other sections */}
     </>
