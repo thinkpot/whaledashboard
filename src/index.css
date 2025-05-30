@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* ——— grid background via a semi‐transparent pseudo‐element ——— */
+.grid-bg {
+  position: relative;             /* establish positioning context */
+  overflow: hidden;               /* ensure the pseudo‐element doesn’t overflow */
+}
+
+.grid-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('/grid.jpg');
+  background-repeat: repeat;
+  background-size: 80px 80px;
+  opacity: 0.6;                  /* adjust this for the level of faintness */
+  z-index: 0;                     /* sit behind all real content */
+}
+
+/* ensure all section content sits above the grid */
+.grid-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Set Sora as the default on <body> */
+@layer base {
+  body {
+    font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+                 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  }
+}
