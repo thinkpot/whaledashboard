@@ -163,9 +163,15 @@ const LandingSection = () => {
               ))}
             </div>
 
-            <button className="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:opacity-90 transition mb-6">
+            <a
+              href="https://calendly.com/admin-whalestreet/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:opacity-90 transition mb-6 inline-block text-center"
+            >
               Book Your 1-on-1 Meeting
-            </button>
+            </a>
+
 
             {/* ─── Rope Swing + Trendline + Finance Bars Container ─── */}
             <div className="mt-10 px-4 sm:px-6 lg:px-0">

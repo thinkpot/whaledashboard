@@ -21,7 +21,7 @@ const dashboards = [
       'Predict bottoms via drawdown mapping',
       'EMA, RSI, ARIMA timing signals',
     ],
-    videoId: 'VIDEO_ID2',
+    videoId: 'fAWHCCr6UMY',
   },
   {
     title: 'ETF Precision',
@@ -57,7 +57,7 @@ const dashboards = [
       'Monitor ATH and 52-week corrections',
       'Identify Fibonacci retracement zones',
     ],
-    videoId: 'VIDEO_ID6',
+    videoId: 'kia6ONNaY20',
   },
 ];
 
