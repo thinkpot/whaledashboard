@@ -49,7 +49,7 @@ const AttendSection = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        After Attending This Webinar, You’ll Be Able To
+        After Attending This Session, You’ll Be Able To
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

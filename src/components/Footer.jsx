@@ -65,7 +65,8 @@ const Footer = () => (
             <FaInstagram size={20} />
           </a>
         </div>
-        <p className="text-gray-300">support@whalestreet.in</p>
+        <p className="text-gray-300">admin@whalestreet.in</p>
+        <p className="text-gray-300">+919625640378</p>
       </div>
     </div>
     <div className="mt-8 text-center text-sm text-gray-400">

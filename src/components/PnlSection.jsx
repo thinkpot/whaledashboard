@@ -5,11 +5,42 @@ import { motion } from 'framer-motion';
 import { FaArrowRight, FaRupeeSign } from 'react-icons/fa';
 
 const pnlData = [
-  { client: 'Aakash Sharma', imageSrc: '/pnl-aakash.png', capital: 100000, profit: 32000, roi: 32, timeframe: 'Jan–Mar 2025' },
-  { client: 'Priya Patel', imageSrc: '/pnl-priya.png', capital: 150000, profit: 45000, roi: 30, timeframe: 'Feb–Apr 2025' },
-  { client: 'Rahul Verma', imageSrc: '/pnl-rahul.png', capital: 200000, profit: 60000, roi: 30, timeframe: 'Mar–May 2025' },
-  { client: 'Sneha Gupta', imageSrc: '/pnl-sneha.png', capital: 120000, profit: 36000, roi: 30, timeframe: 'Apr–Jun 2025' },
-  { client: 'Deepak Jain', imageSrc: '/pnl-deepak.png', capital: 180000, profit: 54000, roi: 30, timeframe: 'May–Jul 2025' },
+  { 
+    client: 'Jagpal Jindal', 
+    imageSrc: '/jagpalpnl.png', 
+    capital: 1000000, 
+    profit: 104219, 
+    roi: 10.4, 
+    timeframe: 'Jan–May 2025',
+    verifiedPdf: 'https://console.zerodha.com/verified/8502e4be'
+  },
+  { 
+    client: 'Kiran Devi', 
+    imageSrc: '/kiranpnl.png', 
+    capital: 500000, 
+    profit: 73932, 
+    roi: 14.78, 
+    timeframe: 'Jan–May 2025',
+    verifiedPdf: 'https://console.zerodha.com/verified/2f004cdc'
+  },
+  { 
+    client: 'Raj Kumar', 
+    imageSrc: '/rajpnl.png', 
+    capital: 500000, 
+    profit: 75495, 
+    roi: 15.09, 
+    timeframe: 'Aug 2024 - May 2025',
+    verifiedPdf: 'https://console.zerodha.com/verified/5784cc0f'
+  },
+  { 
+    client: 'Anant Mishra', 
+    imageSrc: '/anantpnl.png', 
+    capital: 200000, 
+    profit: 65691, 
+    roi: 32.84, 
+    timeframe: 'Aug 2024 - Oct 2024',
+    verifiedPdf: 'https://console.zerodha.com/verified/ee5425f4'
+  },
 ];
 
 export default function PnLSection() {
@@ -199,6 +230,18 @@ export default function PnLSection() {
                 <span className="font-medium">Timeframe</span>
                 <span className="font-semibold">{selected.timeframe}</span>
               </div>
+            </div>
+
+            {/* ─── “View Verified PnL” Button ─── */}
+            <div className="mt-6 text-center">
+              <a
+                href={selected.verifiedPdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-secondary text-white px-6 py-2 rounded-full font-semibold hover:bg-secondary/90 transition"
+              >
+                View Verified PnL
+              </a>
             </div>
           </motion.div>
         </div>

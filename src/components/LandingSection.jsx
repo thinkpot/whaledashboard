@@ -4,97 +4,82 @@ import React from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-const bobAndPulse = {
-  y: {
-    duration: 2,
-    repeat: Infinity,
-    repeatType: 'reverse',
-    ease: 'easeInOut',
-  },
-  scale: {
-    duration: 2,
-    repeat: Infinity,
-    repeatType: 'reverse',
-    ease: 'easeInOut',
-  },
-};
-
 const LandingSection = () => {
   const features = [
     {
-      title: '6 Institutional Statistical Dashboards',
-      text: 'Reveal market insights like top banks and hedge funds using historical & real-time data.',
+      title: 'Verified PnL',
+      yOffset: '15%',    // 15% down from top of rope container
+      swingDelay: 0,
     },
     {
-      title: 'Institutional Advance Datasheet',
-      text: 'Fraud detection, live journaling, and analytics to trade with institutional precision.',
+      title: '5+ Years of Backtest Data',
+      yOffset: '45%',
+      swingDelay: 0.5,
     },
     {
-      title: 'Swing & Intraday Institutional Indicators',
-      text: 'Capture entries & exits with 92% backtested accuracy—modeled on top-tier financial firms.',
-    },
-    {
-      title: 'Art of Finding Multibagger Stocks',
-      text: 'Identify potential multibaggers early with advanced data frameworks and insider insights.',
+      title: 'Associated with Top Institutions',
+      yOffset: '75%',
+      swingDelay: 1,
     },
   ];
 
-  // ─── Define the “uptrend” pathPoints (400×160 viewBox) ───
-  const pathPoints = [
-    { x:   0,  y: 150 },  // bottom-left
-    { x:  40,  y:  90 },  // peak
-    { x:  80,  y: 140 },  // small bottom
-    { x: 120,  y:  80 },  // next peak
-    { x: 160,  y: 130 },  // small bottom
-    { x: 200,  y:  70 },  // big peak
-    { x: 240,  y: 120 },  // small bottom
-    { x: 280,  y:  60 },  // next peak
-    { x: 320,  y: 110 },  // small bottom
-    { x: 360,  y:  50 },  // final peak
-    { x: 400,  y: 100 },  // bottom-right
-  ];
+  // Defines the swinging motion (rotation + slight vertical bob) for banners
+  const bannerMotion = {
+    animate: {
+      rotate: ['-2deg', '2deg', '-2deg'],
+      y: [0, -4, 0],
+      transition: {
+        rotate: { repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' },
+        y: { repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' },
+      },
+    },
+  };
 
-  // ─── Choose three indices for your custom labels ───
-  const chosenPoints = [
-    { index: 1, label: 'Verified PnL',              fadeDelay: 0.2 },
-    { index: 5, label: '5+ Years of Backtest Data', fadeDelay: 0.6 },
-    { index: 9, label: 'Associated with Top Institutions', fadeDelay: 1.0 },
-  ];
-
-  // Convert chosenPoints into position objects (CSS percentages)
-  const uptrendLabels = chosenPoints.map(({ index, label, fadeDelay }) => {
-    const pt = pathPoints[index];
-    const leftPercent = (pt.x / 400) * 100;
-    const bottomPercent = ((160 - pt.y) / 160) * 100;
-    return {
-      label,
-      left: `${leftPercent}%`,
-      bottom: `${bottomPercent}%`,
-      fadeDelay,
-    };
-  });
+  // Defines the wavy rope motion by morphing its path
+  const ropeMotion = {
+    animate: {
+      d: [
+        'M5,0 C4,40 6,80 5,120 C4,160 6,200 5,240',
+        'M5,0 C4.2,40 5.8,80 5,120 C4.2,160 5.8,200 5,240',
+        'M5,0 C4,40 6,80 5,120 C4,160 6,200 5,240',
+      ],
+      transition: { repeat: Infinity, repeatType: 'loop', duration: 3, ease: 'easeInOut' },
+    },
+  };
 
   return (
-    <div className="min-h-screen bg-white grid-bg text-primary">
+    <div className="relative min-h-screen bg-white text-primary overflow-hidden">
+      {/* ─── Grid Background ─── */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundSize: '30px 30px',
+          backgroundImage: `
+            linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px)
+          `,
+        }}
+      />
+
       {/* ─── Top Label ─── */}
-      <div className="text-center mb-6">
-        <span className="inline-block bg-primary text-textcolor_light py-3 px-8 rounded-b-2xl text-2xl font-semibold shadow-lg">
+      <div className="relative z-10 text-center mb-6 px-4 sm:px-6 lg:px-8">
+        <span className="inline-block bg-primary text-white py-3 px-6 sm:px-8 rounded-b-2xl text-xl sm:text-2xl lg:text-3xl font-semibold shadow-lg">
           Transform Your Trading Skills
         </span>
       </div>
 
-      <section className="pt-4 pb-16">
+      <section className="relative z-10 pt-4 pb-16 px-4 sm:px-6 lg:px-8">
         {/* ─── Section Header ─── */}
         <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-primary">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
             Mastering Institutional Trading — Book Your 1-on-1 Meeting
           </h1>
-          <p className="mt-2 text-3xl italic text-secondary">
+          <p className="mt-2 text-xl sm:text-2xl italic text-secondary">
             to become a profitable trader
           </p>
         </div>
 
-        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* ─── Left Column: Video + Feature Cards ─── */}
           <div>
             <div
@@ -112,22 +97,36 @@ const LandingSection = () => {
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-6">
-              {features.map((item, idx) => (
+              {[
+                {
+                  title: '6 Institutional Statistical Dashboards',
+                  text: 'Reveal market insights like top banks and hedge funds using historical & real-time data.',
+                },
+                {
+                  title: 'Institutional Advance Datasheet',
+                  text: 'Fraud detection, live journaling, and analytics to trade with institutional precision.',
+                },
+                {
+                  title: 'Swing & Intraday Institutional Indicators',
+                  text: 'Capture entries & exits with 92% backtested accuracy—modeled on top-tier financial firms.',
+                },
+                {
+                  title: 'Art of Finding Multibagger Stocks',
+                  text: 'Identify potential multibaggers early with advanced data frameworks and insider insights.',
+                },
+              ].map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="flex items-start bg-gray-50 p-5 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                  className="flex items-start bg-gray-50 p-4 sm:p-5 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 200 }}
                 >
-                  <div className="flex-shrink-0">
-                    <FaCheckCircle className="text-primary text-3xl mt-1" />
-                  </div>
+                  <FaCheckCircle className="text-primary text-2xl sm:text-3xl mt-1 flex-shrink-0" />
                   <div className="ml-4">
-                    {/* Title in dark color */}
-                    <h3 className="text-lg font-semibold text-primary mb-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-primary mb-1">
                       {item.title}
                     </h3>
-                    <p className="text-textcolor2 text-sm leading-relaxed">
+                    <p className="text-textcolor2 text-sm sm:text-base leading-relaxed">
                       {item.text}
                     </p>
                   </div>
@@ -136,55 +135,63 @@ const LandingSection = () => {
             </div>
           </div>
 
-          {/* ─── Right Column: Session Info + CTA + Big Uptrend ─── */}
+          {/* ─── Right Column: Rope Swing + Trendline + Finance Bars Background ─── */}
           <div>
-            <h2 className="text-3xl font-bold mb-6 text-primary text-center">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 text-primary text-center">
               Session Highlights
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               {[
-                { icon: '📊', label: 'Institutional Framework', value: '6 Institutional Dashboards Demo' },
-                { icon: '🤝', label: 'Mentorship', value: 'Personalized 1-on-1 Meeting' },
-                { icon: '🔍', label: 'Personal Support', value: 'Portfolio Analysis & Review' },
-                { icon: '🛠️', label: 'Institutional Tools', value: 'Access to All Tools' },
+                { icon: '📊', label: 'Institutional Framework', value: '6 Dashboards Demo' },
+                { icon: '🤝', label: 'Mentorship', value: '1-on-1 Meeting' },
+                { icon: '🔍', label: 'Personal Support', value: 'Portfolio Review' },
+                { icon: '🛠️', label: 'Pro Tools', value: 'All Access' },
               ].map((info, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center bg-gray-50 p-4 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 duration-300"
+                  className="flex items-center bg-gray-50 p-3 sm:p-4 rounded-lg shadow-lg transition-transform transform hover:-translate-y-1 duration-300"
                 >
-                  <div className="p-3 bg-gradient-to-tr from-primary to-secondary text-white rounded-full text-2xl flex-shrink-0">
+                  <div className="p-2 sm:p-3 bg-gradient-to-tr from-primary to-secondary text-white rounded-full text-xl sm:text-2xl flex-shrink-0">
                     {info.icon}
                   </div>
-                  <div className="ml-4">
-                    <p className="text-lg font-semibold text-primary">{info.label}</p>
-                    <p className="text-textcolor2 text-sm">{info.value}</p>
+                  <div className="ml-3">
+                    <p className="text-base sm:text-lg font-semibold text-primary">{info.label}</p>
+                    <p className="text-textcolor2 text-sm sm:text-base">{info.value}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <button className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-full text-lg font-semibold shadow-lg hover:opacity-90 transition mb-6">
+            <button className="w-full bg-gradient-to-r from-primary to-secondary text-white py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:opacity-90 transition mb-6">
               Book Your 1-on-1 Meeting
             </button>
 
-            {/* ─── Attractive Text Design for the Tagline ─── */}
-            <div className="text-center mb-4">
-              <motion.p
-                className="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                The only trading framework that makes you a profitable trader, backed by top institutions.
-              </motion.p>
-            </div>
+            {/* ─── Rope Swing + Trendline + Finance Bars Container ─── */}
+            <div className="mt-10 px-4 sm:px-6 lg:px-0">
+              <div className="relative w-full h-64 sm:h-80 lg:h-96 mx-auto overflow-hidden">
+                {/* ─── Finance Bars Background ─── */}
+                <div className="absolute inset-0 flex items-end space-x-1 px-2 z-5">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="bg-primary/30"
+                      style={{ width: `${100 / 12}%` }}
+                      initial={{ height: '20%' }}
+                      animate={{ height: ['20%', '70%', '20%'] }}
+                      transition={{
+                        duration: 4 + i * 0.2,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: i * 0.2,
+                      }}
+                    />
+                  ))}
+                </div>
 
-            {/* ─── Big Market Uptrend Animation Section ─── */}
-            <div className="mt-10">
-              <div className="relative w-full h-96">
-                {/* SVG Uptrend Path (viewBox 0 0 400 160) */}
+                {/* ─── Trendline Background ─── */}
                 <svg
-                  className="w-full h-full"
+                  className="absolute inset-0 w-full h-full"
                   viewBox="0 0 400 160"
                   preserveAspectRatio="none"
                 >
@@ -203,69 +210,71 @@ const LandingSection = () => {
                       L400,100
                     "
                     fill="transparent"
-                    stroke="#7C3AED"
-                    strokeWidth="4"
-                    initial={{ pathLength: 0, opacity: 0.7 }}
-                    animate={{
-                      pathLength: [0, 1],
-                      opacity: [0.3, 1],
-                    }}
+                    stroke="rgba(99,102,241,0.15)"  // indigo-500 @15% opacity
+                    strokeWidth="6"
+                    initial={{ pathLength: 0, opacity: 0.3 }}
+                    animate={{ pathLength: 1, opacity: 0.6 }}
                     transition={{
-                      pathLength: {
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      },
-                      opacity: {
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      },
+                      pathLength: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                      opacity: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
                     }}
                   />
                 </svg>
 
-                {/* ─── Exactly Three Bubbles (Verified PnL, 5+ Years, Associated…) ─── */}
-                {uptrendLabels.map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="absolute bg-primary text-textcolor px-4 py-2 rounded-full font-semibold shadow-lg whitespace-nowrap"
-                    style={{
-                      left: item.left,
-                      bottom: item.bottom,
-                      transform: 'translateX(-50%)',
-                    }}
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    animate={[
-                      // 1) Pop-in (fade + scale to normal)
-                      {
-                        opacity: 1,
-                        scale: 1,
-                        y: 0,
-                        transition: {
-                          delay: item.fadeDelay,
-                          duration: 0.6,
-                          ease: 'easeOut',
-                        },
-                      },
-                      // 2) Then infinite bob + pulse
-                      {
-                        y: ['0%', '-10%', '0%'],
-                        scale: [1, 1.06, 1],
-                        transition: {
-                          y:     { ...bobAndPulse.y,     delay: item.fadeDelay + 0.6 },
-                          scale: { ...bobAndPulse.scale, delay: item.fadeDelay + 0.6 },
-                        },
-                      },
-                    ]}
+                {/* ─── Centered Flex Wrapper for Rope & Banners ─── */}
+                <div className="absolute inset-0 flex justify-center items-start z-10">
+                  {/* Wavy Rope */}
+                  <svg
+                    className="w-1/12 h-full"
+                    viewBox="0 0 10 200"
+                    preserveAspectRatio="none"
                   >
-                    {item.label}
-                  </motion.div>
-                ))}
+                    <motion.path
+                      d="M5,0 C4,40 6,80 5,120 C4,160 6,200 5,240"
+                      stroke="#7C3AED"
+                      strokeWidth="2"
+                      fill="none"
+                      variants={ropeMotion}
+                      animate="animate"
+                    />
+                  </svg>
+
+                  {/* Overlayed banners need a relative container for vertical offsets */}
+                  <div className="absolute inset-0 flex flex-col items-center">
+                    {features.map((f, idx) => (
+                      <motion.div
+                        key={idx}
+                        className="absolute"
+                        style={{ top: f.yOffset }}
+                        initial={{ rotate: '-2deg', y: 0 }}
+                        animate={bannerMotion.animate}
+                        transition={{
+                          rotate: {
+                            delay: f.swingDelay,
+                            repeat: Infinity,
+                            repeatType: 'loop',
+                            duration: 3,
+                            ease: 'easeInOut',
+                          },
+                          y: {
+                            delay: f.swingDelay,
+                            repeat: Infinity,
+                            repeatType: 'loop',
+                            duration: 3,
+                            ease: 'easeInOut',
+                          },
+                        }}
+                      >
+                        <div className="bg-primary text-white px-4 sm:px-6 py-2 rounded-lg shadow-lg whitespace-nowrap">
+                          {f.title}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             {/* ──────────────────────────────────────────────────────────── */}
-
           </div>
         </div>
       </section>

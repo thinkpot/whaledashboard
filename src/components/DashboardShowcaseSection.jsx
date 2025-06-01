@@ -12,7 +12,7 @@ const dashboards = [
       'Evaluate market strength swiftly',
       'Insights for index allocation',
     ],
-    videoId: 'VIDEO_ID1',
+    videoId: '_PAVlUw46kc',
   },
   {
     title: 'Quantum Bottom Finder',
@@ -30,7 +30,7 @@ const dashboards = [
       'Monitor major support levels',
       'Understand sector ETF dynamics',
     ],
-    videoId: 'VIDEO_ID3',
+    videoId: 'IKT1kUIQ4CI',
   },
   {
     title: 'Profit-Scan',
@@ -39,7 +39,7 @@ const dashboards = [
       'See allocation breakdown graphically',
       'Get diversification score easily',
     ],
-    videoId: 'VIDEO_ID4',
+    videoId: '6-leZs-Q8V0',
   },
   {
     title: 'Event Master',
@@ -48,7 +48,7 @@ const dashboards = [
       'Analyze market reactions post-event',
       'Forecast trends from past events',
     ],
-    videoId: 'VIDEO_ID5',
+    videoId: 'xLSeZIlBhvI',
   },
   {
     title: 'Data Legacy',

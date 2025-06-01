@@ -4,9 +4,9 @@ import CTAButton from './CTAButton';
 import { FaRupeeSign } from 'react-icons/fa';
 
 const gifts = [
-  { title: 'Chart & Candlestick Patterns PDF', value: '699' },
-  { title: 'Most Powerful Trading eBooks', value: '1999' },
-  { title: 'Webinar Slides', value: '1499' },
+  { title: 'EMA & RSI backtest report', value: '1999' },
+  { title: 'Advanced Screener Spreadsheets', value: '6999' },
+  { title: 'List of Multibagger Stocks', value: '3999' },
 ];
 
 // Motion variants
@@ -42,7 +42,7 @@ const GiftsSection = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        Free Gifts Worth <FaRupeeSign className="inline" />4200 for Full Masterclass Attendees!
+        Free Gifts Worth <FaRupeeSign className="inline" />10999 Just by Attending This Session!
       </motion.h2>
 
       {/* Animated Underline */}
@@ -95,7 +95,7 @@ const GiftsSection = () => (
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
       >
-        Price is Less than a Cup of Tea
+        Unlock these free gifts just by attending session!
       </motion.p>
     </div>
   </section>

@@ -1,15 +1,16 @@
 // src/components/IndicatorShowcaseSection.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import CTAButton from './CTAButton';
-import { FaPlay } from 'react-icons/fa';
+import { FaPlay, FaTimes } from 'react-icons/fa';
 
 // Sample data
 const indicators = [
   {
-    imageSrc: '/indicator.jpeg',
+    imageSrc: '/intraday.jpeg',
     title: 'SignalAI (Intraday Indicator)',
+    demoVideoId: 'c0bly6Er47k', // Replace with actual YouTube video ID
     data: [
       { label: 'Accuracy', value: '80%' },
       { label: 'Feature', value: 'Predefined TP & SL' },
@@ -20,8 +21,9 @@ const indicators = [
     ],
   },
   {
-    imageSrc: '/indicator2.jpeg',
+    imageSrc: '/swing.jpeg',
     title: 'BottomX (Swing Indicator)',
+    demoVideoId: 'YQMVpVDqEPw', // Replace with actual YouTube video ID
     data: [
       { label: 'Accuracy', value: '92%' },
       { label: 'Feature', value: 'Capture Bottom' },
@@ -34,6 +36,8 @@ const indicators = [
 ];
 
 export default function IndicatorShowcaseSection() {
+  const [modalVideoId, setModalVideoId] = useState(null);
+
   // Generate 10 animated bars for background
   const barCount = 10;
   const bars = Array.from({ length: barCount }, (_, i) => i);
@@ -79,7 +83,7 @@ export default function IndicatorShowcaseSection() {
           <motion.div
             key={idx}
             className="mx-1 bg-secondary/20 w-2 rounded-t-md"
-            style={{ height: '20%' }}
+            initial={{ height: '20%' }}
             animate={{
               height: [
                 '10%',
@@ -180,9 +184,13 @@ export default function IndicatorShowcaseSection() {
                     transition={{ type: 'spring', stiffness: 300 }}
                     className="inline-block"
                   >
-                    <CTAButton onClick={() => console.log(`View demo ${ind.title}`)}>
-                      <FaPlay className="mr-2" /> View Demo
-                    </CTAButton>
+                    <button
+                      className="bg-gradient-to-tr from-primary to-secondary text-white px-6 py-2 rounded-full font-semibold"
+                      onClick={() => setModalVideoId(ind.demoVideoId)}
+                    >
+                      <FaPlay className="mr-2 inline" />
+                      View Demo
+                    </button>
                   </motion.div>
                 </div>
               </div>
@@ -193,10 +201,38 @@ export default function IndicatorShowcaseSection() {
         {/* Main CTA */}
         <div className="mt-16 text-center">
           <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-            <CTAButton onClick={() => console.log('Book meeting')}>Book Your 1-on-1 Meeting</CTAButton>
+            <CTAButton onClick={() => console.log('Book meeting')}>
+              Book Your 1-on-1 Meeting
+            </CTAButton>
           </motion.div>
         </div>
       </div>
+
+      {/* ─── Video Modal ─── */}
+      {modalVideoId && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+          <div className="relative w-11/12 sm:w-3/4 lg:w-1/2 xl:w-2/5">
+            {/* Close Button (higher z-index than iframe) */}
+            <button
+              className="absolute top-2 right-2 z-30 text-white text-2xl"
+              onClick={() => setModalVideoId(null)}
+            >
+              <FaTimes />
+            </button>
+            {/* Responsive 16:9 iframe container */}
+            <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                src={`https://www.youtube.com/embed/${modalVideoId}?autoplay=1`}
+                title="Indicator Demo"
+                frameBorder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full z-20"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
