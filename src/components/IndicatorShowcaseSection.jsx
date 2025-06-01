@@ -1,4 +1,5 @@
 // src/components/IndicatorShowcaseSection.jsx
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import CTAButton from './CTAButton';
@@ -15,8 +16,7 @@ const indicators = [
       { label: 'RR Ratio', value: '1:3' },
       { label: 'Assets', value: 'All' },
       { label: 'Backtest', value: '5 Years' },
-      { label: 'Strategy', value: 'Machine Learning AI'}
-      
+      { label: 'Strategy', value: 'Machine Learning AI' },
     ],
   },
   {
@@ -28,18 +28,84 @@ const indicators = [
       { label: 'Stoploss', value: 'Not Needed' },
       { label: 'Assets', value: 'Equity' },
       { label: 'Backtest', value: '5 Years' },
-      { label: 'Strategy', value: 'Statistics Modelling'}
+      { label: 'Strategy', value: 'Statistics Modelling' },
     ],
   },
 ];
 
 export default function IndicatorShowcaseSection() {
+  // Generate 10 animated bars for background
+  const barCount = 10;
+  const bars = Array.from({ length: barCount }, (_, i) => i);
+
   return (
     <section className="relative bg-[#F3E8FF] py-20 overflow-hidden">
-      {/* Decorative circle */}
-      <div className="absolute -top-16 -left-16 w-64 h-64 bg-secondary/20 rounded-full pointer-events-none" />
+      {/* ─── STOCK-INDICATOR BACKGROUND MOTION ─── */}
+      {/* 1) Animated Polyline “Indicator Line” */}
+      <motion.svg
+        className="absolute inset-0 w-full h-full z-0"
+        viewBox="0 0 1000 200"
+        preserveAspectRatio="none"
+      >
+        <motion.path
+          d="
+            M0,130
+            L100,100
+            L200,120
+            L300,90
+            L400,110
+            L500,80
+            L600,140
+            L700,70
+            L800,120
+            L900,90
+            L1000,110
+          "
+          fill="transparent"
+          stroke="rgba(50, 22, 110, 0.15)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{
+            pathLength: { duration: 6, repeat: Infinity, ease: 'linear' },
+          }}
+        />
+      </motion.svg>
 
-      <div className="relative max-w-6xl mx-auto px-4">
+      {/* 2) Animated Vertical Bars “Volume Bars” */}
+      <div className="absolute inset-0 z-0 flex items-end">
+        {bars.map((_, idx) => (
+          <motion.div
+            key={idx}
+            className="mx-1 bg-secondary/20 w-2 rounded-t-md"
+            style={{ height: '20%' }}
+            animate={{
+              height: [
+                '10%',
+                '70%',
+                '20%',
+                '60%',
+                '15%',
+                '80%',
+                '25%',
+                '50%',
+                '30%',
+                '65%',
+              ][idx % 10],
+            }}
+            transition={{
+              duration: 4 + idx * 0.2,
+              repeat: Infinity,
+              repeatType: 'reverse',
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+      </div>
+      {/* ──────────────────────────────────────────── */}
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4">
         {/* Section Heading */}
         <motion.div
           className="text-center mb-12"
@@ -47,9 +113,7 @@ export default function IndicatorShowcaseSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-5xl font-bold text-primary">
-            Live Indicator Overview
-          </h2>
+          <h2 className="text-5xl font-bold text-primary">Live Indicator Overview</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -92,12 +156,8 @@ export default function IndicatorShowcaseSection() {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
                     >
-                      <span className="block text-sm text-secondary">
-                        {item.label}
-                      </span>
-                      <span className="block font-medium text-primary">
-                        {item.value}
-                      </span>
+                      <span className="block text-sm text-secondary">{item.label}</span>
+                      <span className="block font-medium text-primary">{item.value}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -109,9 +169,7 @@ export default function IndicatorShowcaseSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
                 >
-                  <p className="text-sm italic text-secondary">
-                    Trusted by top institutions
-                  </p>
+                  <p className="text-sm italic text-secondary">Trusted by top institutions</p>
                 </motion.div>
 
                 {/* View Demo with hover animation */}
@@ -135,9 +193,7 @@ export default function IndicatorShowcaseSection() {
         {/* Main CTA */}
         <div className="mt-16 text-center">
           <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-            <CTAButton onClick={() => console.log('Book meeting')}>
-              Book Your 1-on-1 Meeting
-            </CTAButton>
+            <CTAButton onClick={() => console.log('Book meeting')}>Book Your 1-on-1 Meeting</CTAButton>
           </motion.div>
         </div>
       </div>

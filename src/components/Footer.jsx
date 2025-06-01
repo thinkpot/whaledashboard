@@ -8,18 +8,18 @@ const partners = [
 ];
 
 const Footer = () => (
-  <footer className="bg-primary text-textcolor py-12 ">
+  <footer className="bg-[#1e2432] text-white py-12">
     <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
       {/* Brand Info */}
       <div>
         <h4 className="text-2xl font-bold mb-2">Whalestreet</h4>
-        <p className="text-textcolor">Empowering your trading journey with pro-grade tools.</p>
+        <p className="text-gray-300">Empowering your trading journey with instituional pro-grade tools.</p>
       </div>
 
       {/* Quick Links */}
       <div>
         <h5 className="text-xl font-semibold mb-2">Quick Links</h5>
-        <ul className="space-y-1 text-textcolor">
+        <ul className="space-y-1 text-gray-300">
           <li><a href="#tools" className="hover:text-white transition">Tools</a></li>
           <li><a href="#demo" className="hover:text-white transition">Demo</a></li>
           <li><a href="#contact" className="hover:text-white transition">Contact</a></li>
@@ -52,23 +52,23 @@ const Footer = () => (
       <div>
         <h5 className="text-xl font-semibold mb-2">Connect With Us</h5>
         <div className="flex space-x-4 mb-4">
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100">
             <FaTwitter size={20} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100">
             <FaLinkedin size={20} />
           </a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100">
             <FaFacebook size={20} />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100">
             <FaInstagram size={20} />
           </a>
         </div>
-        <p className="text-textcolor">support@whalestreet.in</p>
+        <p className="text-gray-300">support@whalestreet.in</p>
       </div>
     </div>
-    <div className="mt-8 text-center text-sm text-textcolor">
+    <div className="mt-8 text-center text-sm text-gray-400">
       © {new Date().getFullYear()} Whalestreet. All rights reserved.
     </div>
   </footer>
