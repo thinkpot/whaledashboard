@@ -4,11 +4,11 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 
 // FAQ data
 const faqs = [
-  { question: 'Is this workshop free to attend?', answer: 'Yes, this masterclass is completely free for all registered attendees.' },
+  { question: 'Is this session free to attend?', answer: 'Yes, this session is completely free for all registered attendees.' },
   { question: 'Is there any prerequisite knowledge required?', answer: 'No prior experience needed; we cover fundamentals to advanced strategies.' },
-  { question: 'How long is the workshop?', answer: 'The workshop lasts 120 minutes with interactive Q&A breaks.' },
+  { question: 'How long is the session?', answer: 'The session lasts 120 minutes with interactive Q&A.' },
   { question: 'Can I ask questions during the session?', answer: 'Absolutely! Live Q&A is encouraged throughout.' },
-  { question: 'Will I get a recording of the workshop?', answer: 'Yes, all registrants receive a recording link post-event.' },
+  { question: 'Will I get a recording of the session?', answer: 'No, As we know its 1-1 on sessions.' },
 ];
 
 const FAQSection = () => {

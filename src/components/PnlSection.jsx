@@ -1,8 +1,9 @@
+// src/components/PnLSection.jsx
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowRight, FaRupeeSign } from 'react-icons/fa';
 
-// Sample P&L data with images
 const pnlData = [
   { client: 'Aakash Sharma', imageSrc: '/pnl-aakash.png', capital: 100000, profit: 32000, roi: 32, timeframe: 'Jan–Mar 2025' },
   { client: 'Priya Patel', imageSrc: '/pnl-priya.png', capital: 150000, profit: 45000, roi: 30, timeframe: 'Feb–Apr 2025' },
@@ -11,26 +12,133 @@ const pnlData = [
   { client: 'Deepak Jain', imageSrc: '/pnl-deepak.png', capital: 180000, profit: 54000, roi: 30, timeframe: 'May–Jul 2025' },
 ];
 
-const PnLSection = () => {
+export default function PnLSection() {
   const [selected, setSelected] = useState(pnlData[0]);
 
+  // Configuration for floating icons
+  const floatIcons = [
+    { left: '10%', delay: 0 },
+    { left: '30%', delay: 1 },
+    { left: '50%', delay: 2 },
+    { left: '70%', delay: 1.5 },
+    { left: '90%', delay: 0.5 },
+  ];
+
   return (
-    <section className="py-16 bg-white grid-bg">
-      {/* Section Heading */}
-      <div className="max-w-7xl mx-auto px-4 text-center mb-12">
+    <section className="relative py-16 bg-white overflow-hidden">
+      {/* ─── Grid Overlay ─── */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundSize: '40px 40px',
+          backgroundImage: `
+            linear-gradient(rgba(124, 58, 237, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(124, 58, 237, 0.1) 1px, transparent 1px)
+          `,
+        }}
+      />
+
+      {/* ─── Floating Background Rupee Icons & Sparkles & Waves ─── */}
+      <div className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
+        {/* Floating Rupee Icons */}
+        {floatIcons.map((cfg, idx) => (
+          <motion.div
+            key={idx}
+            className="absolute"
+            style={{
+              left: cfg.left,
+              bottom: '-20%',
+            }}
+            initial={{ opacity: 0.6 }}
+            animate={{
+              bottom: ['-20%', '120%'],
+              opacity: [0.6, 0.3, 0],
+            }}
+            transition={{
+              bottom: {
+                duration: 8 + idx * 0.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: cfg.delay,
+              },
+              opacity: {
+                duration: 8 + idx * 0.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: cfg.delay,
+              },
+            }}
+          >
+            <FaRupeeSign className="text-purple-600 text-5xl" />
+          </motion.div>
+        ))}
+
+        {/* Sparkle Dots */}
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={`sparkle-${i}`}
+            className="absolute bg-purple-400 rounded-full"
+            style={{
+              width: '8px',
+              height: '8px',
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.7, 0], scale: [1, 2, 1] }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+
+        {/* Animated Wave Lines */}
+        <motion.svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1000 200"
+          preserveAspectRatio="none"
+        >
+          <motion.path
+            d="M0,140 C250,100 750,180 1000,120"
+            fill="transparent"
+            stroke="rgba(124, 58, 237, 0.2)"
+            strokeWidth="5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ pathLength: { duration: 5, repeat: Infinity, ease: 'linear' } }}
+          />
+          <motion.path
+            d="M0,160 C250,120 750,200 1000,140"
+            fill="transparent"
+            stroke="rgba(124, 58, 237, 0.15)"
+            strokeWidth="4"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ pathLength: { duration: 7, repeat: Infinity, ease: 'linear', delay: 1 } }}
+          />
+        </motion.svg>
+      </div>
+
+      {/* ─── Main Content ─── */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 text-center mb-12">
         <h2 className="text-4xl font-bold text-primary">Verified P&L Records</h2>
         <p className="mt-2 text-lg text-gray-600">Real trader results, transparently shared</p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Client List */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* ─── Client List ─── */}
         <ul className="space-y-4">
           {pnlData.map((row) => (
             <li
               key={row.client}
               onClick={() => setSelected(row)}
               className={`flex items-center p-4 rounded-lg cursor-pointer transition ${
-                selected.client === row.client ? 'bg-primary/10 border-l-4 border-primary' : 'bg-gray-50 hover:bg-primary/5'
+                selected.client === row.client
+                  ? 'bg-primary/10 border-l-4 border-primary'
+                  : 'bg-gray-50 hover:bg-primary/5'
               }`}
             >
               <img
@@ -45,7 +153,7 @@ const PnLSection = () => {
           ))}
         </ul>
 
-        {/* Detail Panel */}
+        {/* ─── Detail Panel ─── */}
         <div className="relative">
           <motion.div
             key={selected.client}
@@ -61,19 +169,27 @@ const PnLSection = () => {
               alt={`${selected.client} PnL Chart`}
               className="w-full h-48 object-cover rounded-md mb-4"
             />
+
             {/* Header */}
             <div className="bg-gradient-to-r from-primary to-secondary text-white rounded-t-xl px-4 py-3">
               <h3 className="text-2xl font-bold">{selected.client}</h3>
             </div>
+
             {/* Metrics */}
             <div className="mt-6 space-y-4">
               <div className="flex justify-between">
                 <span className="font-medium">Invested Capital</span>
-                <span className="font-semibold"><FaRupeeSign className="inline" />{selected.capital.toLocaleString()}</span>
+                <span className="font-semibold">
+                  <FaRupeeSign className="inline" />
+                  {selected.capital.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="font-medium">Profit Gained</span>
-                <span className="font-semibold"><FaRupeeSign className="inline" />{selected.profit.toLocaleString()}</span>
+                <span className="font-semibold">
+                  <FaRupeeSign className="inline" />
+                  {selected.profit.toLocaleString()}
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="font-medium">ROI</span>
@@ -89,6 +205,4 @@ const PnLSection = () => {
       </div>
     </section>
   );
-};
-
-export default PnLSection;
+}
